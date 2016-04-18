@@ -1,0 +1,15 @@
+$def with (form)
+
+<body bgcolor="#7fff00">
+
+<title>My search page!</title>
+
+<h1>Welcome to film search page!</h1>
+
+<p>Please input specific value in following fields to narrow down your selection<P>
+
+<form action="results" name=query method="get">
+$:form.render()
+<input type="submit" value="Search" />    </form>
+
+</body>

@@ -1,0 +1,77 @@
+$def with (hits, content_list, related_fields, new_form, new_button_form)
+<body bgcolor="#5f9ea0">
+
+<h1>Search Results:<br></h1>
+<p>The number of hits: $hits </p>
+<p>The films matched:<br></p>
+$if new_button_form != None:
+	$for content in content_list[:10]:
+		$if 'text' in related_fields and 'title' in related_fields:
+			$for fields in related_fields:
+				$:fields:
+				$for value in content['highlight'][fields]:
+					$:value<br>
+			<br><br><br>
+		$elif 'text' in related_fields:
+			title: $:content['_source']['title']<br>
+			$for fields in related_fields:
+				$:fields:
+				$for value in content['highlight'][fields]:
+					$:value<br>
+			<br><br><br>
+		$elif 'title' in related_fields:
+			text: $:content['_source']['text']<br>
+			$for fields in related_fields:
+				$:fields:
+				$for value in content['highlight'][fields]:
+					$:value<br>
+			<br><br><br>
+		$else:
+			title: $:content['_source']['title']<br>
+			text: $:content['_source']['text']<br>
+			$for fields in related_fields:
+				$:fields:
+				$for value in content['highlight'][fields]:
+					$:value<br>
+			<br><br><br>
+
+	<form method="post">
+	$:new_button_form.render()
+	</form>
+
+$else:
+	$for content in content_list:
+	$if 'text' in related_fields and 'title' in related_fields:
+		$for fields in related_fields:
+			$:fields:
+			$for value in content['highlight'][fields]:
+				$:value<br>
+		<br><br><br>
+	$elif 'text' in related_fields:
+		title: $:content['_source']['title']<br>
+		$for fields in related_fields:
+			$:fields:
+			$for value in content['highlight'][fields]:
+				$:value<br>
+		<br><br><br>
+	$elif 'title' in related_fields:
+		text: $:content['_source']['text']<br>
+		$for fields in related_fields:
+			$:fields:
+			$for value in content['highlight'][fields]:
+				$:value<br>
+		<br><br><br>
+	$else:
+		title: $:content['_source']['title']<br>
+		text: $:content['_source']['text']<br>
+		$for fields in related_fields:
+			$:fields:
+			$for value in content['highlight'][fields]:
+				$:value<br>
+		<br><br><br>
+
+<form method="post">
+	$:new_form.render()
+	<input type="submit" value="Search" /> </form>
+
+</body>

@@ -1,0 +1,61 @@
+{u'_type': u'movie', u'_source': {u'language': u'Japanese', u'title': u'The Emperor in August', u'country': u'J
+apan', u'time': [u'1945'], u'director': u'Masato Harada', u'location': [], u'starring': [u'Koji Yakusho', u'Mas
+ahiro Motoki', u'Tori Matsuzaka', u'Shinichi Tsutsumi', u'Tsutomu Yamazaki'], u'text': u" is a 2015 Japanese hi
+storical drama film directed by Masato Harada. It was released on August 8, 2015.\n\n==Cast==\nKji Yakusho as K
+orechika Anami\nMasahiro Motoki as Emperor Hirohito\nTori Matsuzaka as Kenji Hatanaka\nKenichi Yajima as Kichi
+Kido\nAkaji Maro as Hisanori Fujita\nIkuji Nakamura as Mitsumasa Yonai\nKazuhiro Yamaji as Tji Yasui\nSeiz Fuku
+moto\nMisako Renbutsu\nErika Toda (special appearance)\nKenichi Matsuyama (special appearance)\nShinichi Tsutsu
+mi as Hisatsune Sakomizu\nTsutomu Yamazaki as Prime Minister Kantar Suzuki\n\n==Reception==\nThe film grossed
+on its opening weekend and was number 10 at the box office. It had grossed  by August 26.\n\nJapan's Longest Da
+
+y (1967)\n\n", u'runtime': u'136', u'categories': [u'Japanese films', u'2010s historical films', u'2010s drama
+films', u'Japanese historical films', u'Japanese drama films', u'World War II films based on actual events', u'
+Films directed by Masato Harada', u'Films set in 1945']}, u'_index': u'mv_index', u'_version': 8, u'found': Tru
+e, u'_id': u'643'}
+
+
+
+
+$def with (hits, content_list, related_fields, new_form, new_button_form)
+<body bgcolor="#5f9ea0">
+
+<h1>Search Results:<br></h1>
+<p>The number of hits: $hits </p>
+<p>The films matched:<br></p>
+$if new_button_form != None:
+	$for content in content_list[:10]:
+		$if 'title' in related_fields:
+			$for fields in related_fields:
+				$:fields: $:content['_source'][fields]<br>
+			highlight: $:content['highlight']<br>
+			<br><br><br>
+		$else:
+			title: $:content['_source']['title']<br>
+			$for fields in related_fields:
+				$:fields: $:content['_source'][fields]<br>
+			highlight: $:content['highlight']<br>
+			<br><br><br>
+
+	<form method="post">
+	$:new_button_form.render()
+	</form>
+
+$else:
+	$for content in content_list:
+		$if 'title' in related_fields:
+			$for fields in related_fields:
+				$:fields: $:content['_source'][fields]<br>
+			highlight: $:content['highlight']<br>
+			<br><br><br>
+		$else:
+			title: $:content['_source']['title']<br>
+			$for fields in related_fields:
+				$:fields: $:content['_source'][fields]<br>
+			highlight: $:content['highlight']<br>
+			<br><br><br>
+
+<form method="post">
+	$:new_form.render()
+	<input type="submit" value="Search" /> </form>
+
+</body>

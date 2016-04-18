@@ -1,0 +1,23 @@
+{
+    "settings":{
+        "index":{
+            "analysis":{
+                "analyzer":{
+                    "snowball_analyzer":{"type": "snowball","language": "English"},
+                    "analyzer_lower":{"type": "standard","lowercase": "true"}
+                }
+            }
+        }},
+    "mappings":{"movie":{"properties":{
+            "language":     {"type":"string", "analyzer":"analyzer_lower", "index_options":"offsets"},
+            "title":        {"type":"string", "analyzer":"snowball_analyzer", "index_options":"offsets"},
+            "country":      {"type":"string", "analyzer":"analyzer_lower", "index_options":"offsets"},
+            "time":         {"type":"string", "analyzer":"snowball_analyzer", "index_options":"offsets"},
+            "director":     {"type":"string", "analyzer":"snowball_analyzer", "index_options":"offsets"},
+            "location":     {"type":"string", "analyzer":"snowball_analyzer", "index_options":"offsets"},
+            "starring":     {"type":"string", "analyzer":"analyzer_lower", "index_options":"offsets"},
+            "text":         {"type":"string", "analyzer":"snowball_analyzer", "index_options":"offsets"},
+            "runtime":      {"type":"string", "analyzer":"snowball_analyzer", "index_options":"offsets"},
+            "categories":   {"type":"string", "analyzer":"snowball_analyzer", "index_options":"offsets"}
+        }}}
+}
